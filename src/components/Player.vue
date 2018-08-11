@@ -1,37 +1,46 @@
 <template>
-    <div>
-        <span v-hide v-html="welcomeMessage"></span>
-        <form v-hide>
-            <input name="player" placeholder="Entrez votre nom de joueur" v-border:red />
-            <button  type="submit" v-border:green>Jouer</button>
+    <div class="player">
+        <span v-html="welcomeMessage" :class="{hide: !player}"></span>
+
+        <form @submit.prevent="setPlayer" :class="{hide: player}">
+            <input name="player" placeholder="Entrez votre nom de joueur" />
+            <button  type="submit">Jouer</button>
         </form>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'player',
-    created: function() {
-        this.player = 'Benjamin'
-        this.playerClass = this.player ? 'player' : 'playerForm'
-        this.welcomeMessage = this.player ? `Bonjour <span class="player">${this.player}</span> !` : ''
-    },
-    directives: {
-        border: function(el, binding) {
-            el.style.borderColor = binding.arg
-        },
-        hide: function(el, binding, vnode) {
-            let isForm = vnode.tag == 'form'
-            let player = vnode.context.player
-            if (isForm) {
-                el.style.display = player ? 'none' : 'block'
-            } else {
-                el.style.display = player ? 'block' : 'none'
-            }
-        }
-    }
+  name: 'player',
+  data: function() {
+      return {
+          player: '',
+          welcomeMessage: ''
+      }
+  },
+  updated: function () {
+    this.welcomeMessage = `Bonjour <span class="player">${this.player}</span> !`
+  },
+  methods: {
+      setPlayer: function (event) {
+          let playername = event.target[0].value
+
+          if (!playername) {
+              window.alert('Merci de renseigner votre pseudo')
+              return
+          }
+          this.player = playername
+          this.$emit('player')
+      }
+  }
 }
 </script>
 
 <style scoped>
+.player {
+    text-align: center;
+}
+.hide {
+    display: none;
+}
 </style>

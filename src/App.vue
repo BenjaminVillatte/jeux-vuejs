@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <game />
-    <player />
-    <score />
+    <game :player="player" @score="updateScore" />
+    <player @player="updatePlayer" />
+    <score :player="player" :score="score" />
   </div>
 </template>
 
@@ -12,12 +12,26 @@ import Score from './components/Score.vue'
 import Player from './components/Player.vue'
 
 export default {
-  name: 'app',
-  components: {
-    Game,
-    Score,
-    Player
-  }
+    name: 'app',
+    data () {
+        return {
+            score: 0,
+            player: false
+        }
+    },
+    components: {
+        Game,
+        Score,
+        Player
+    },
+    methods: {
+        updateScore (score) {
+            this.score = score
+        },
+        updatePlayer () {
+            this.player = true
+        }
+    }
 }
 </script>
 
@@ -26,5 +40,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 500px;
+  display: block;
 }
 </style>
