@@ -12,26 +12,26 @@ import Score from './components/Score.vue'
 import Player from './components/Player.vue'
 
 export default {
-    name: 'app',
-    data () {
-        return {
-            score: 0,
-            player: false
-        }
-    },
-    components: {
-        Game,
-        Score,
-        Player
-    },
-    methods: {
-        updateScore (score) {
-            this.score = score
-        },
-        updatePlayer () {
-            this.player = true
-        }
+  name: 'app',
+  data () {
+    return {
+      score: 0,
+      player: false
     }
+  },
+  components: {
+    Game,
+    Score,
+    Player
+  },
+  methods: {
+    updateScore (score) {
+      this.score = score
+    },
+    updatePlayer () {
+      this.player = true
+    }
+  }
 }
 </script>
 

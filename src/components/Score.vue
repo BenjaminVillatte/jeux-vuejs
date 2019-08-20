@@ -6,11 +6,11 @@
 
 <script>
 export default {
-    name: 'score',
-    props: {
-        score: Number,
-        player: Boolean
-    }
+  name: 'score',
+  props: {
+    score: Number,
+    player: Boolean
+  }
 }
 </script>
 

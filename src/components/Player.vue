@@ -12,26 +12,26 @@
 <script>
 export default {
   name: 'player',
-  data: function() {
-      return {
-          player: '',
-          welcomeMessage: ''
-      }
+  data: function () {
+    return {
+      player: '',
+      welcomeMessage: ''
+    }
   },
   updated: function () {
     this.welcomeMessage = `Bonjour <span class="player">${this.player}</span> !`
   },
   methods: {
-      setPlayer: function (event) {
-          let playername = event.target[0].value
+    setPlayer: function (event) {
+      let playername = event.target[0].value
 
-          if (!playername) {
-              window.alert('Merci de renseigner votre pseudo')
-              return
-          }
-          this.player = playername
-          this.$emit('player')
+      if (!playername) {
+        window.alert('Merci de renseigner votre pseudo')
+        return
       }
+      this.player = playername
+      this.$emit('player')
+    }
   }
 }
 </script>
