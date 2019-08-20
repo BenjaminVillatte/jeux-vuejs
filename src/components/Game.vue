@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="game" v-on:click="clickOnInterface" :class="{wait: !player || stopped}">
+        <div id="game" class="game" v-on:click="clickOnInterface" :class="{wait: !player || stopped}">
             <span class="time" v-if="!stopped">{{ time }}</span>
             <span class="round"
                 v-if="player && !stopped"
@@ -100,9 +100,12 @@ export default {
       }
     },
     updateRound: function () {
+      const width = document.getElementById('game').offsetWidth
+      const height = document.getElementById('game').offsetHeight
+
       let size = Math.random() * (100 - 10) + 10
-      let top = Math.random() * (55 - 5) + 5
-      let left = Math.random() * (55 - 5) + 5
+      let top = Math.random() * (height - 5) + 5
+      let left = Math.random() * (width - 5) + 5
 
       this.badColorActivated = size < 20
       this.bonusActivated = size > 80
@@ -114,7 +117,7 @@ export default {
       }, 'round')
 
       this.roundStyle.width = this.roundStyle.height = `${size}px`
-      this.roundStyle.margin = `${top}% ${left}%`
+      this.roundStyle.margin = `${top}px ${left}px`
     },
     addLog (message, type) {
       if (!this.player || this.stopped) {
